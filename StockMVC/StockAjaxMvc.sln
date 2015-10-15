@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAjaxMvc", "StockAjaxMvc\StockAjaxMvc.csproj", "{A080DA66-A07B-4E50-96BD-FEAA20D15738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAjaxMVC.BLL", "StockAjaxMVC.BLL\StockAjaxMVC.BLL.csproj", "{8C5CA7DE-7646-4BDF-8516-EE25D0135A38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAjaxMvc.Model", "StockAjaxMvc.Model\StockAjaxMvc.Model.csproj", "{6CB333BC-D76D-4F1F-A84A-AE46D7C09CFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A080DA66-A07B-4E50-96BD-FEAA20D15738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A080DA66-A07B-4E50-96BD-FEAA20D15738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A080DA66-A07B-4E50-96BD-FEAA20D15738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A080DA66-A07B-4E50-96BD-FEAA20D15738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C5CA7DE-7646-4BDF-8516-EE25D0135A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5CA7DE-7646-4BDF-8516-EE25D0135A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5CA7DE-7646-4BDF-8516-EE25D0135A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5CA7DE-7646-4BDF-8516-EE25D0135A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB333BC-D76D-4F1F-A84A-AE46D7C09CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB333BC-D76D-4F1F-A84A-AE46D7C09CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB333BC-D76D-4F1F-A84A-AE46D7C09CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB333BC-D76D-4F1F-A84A-AE46D7C09CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,34 @@
+﻿@using HRPortal.WebModels
+@model PolicyToAddVM
+@{
+    ViewBag.Title = "PolicyForm";
+}
+
+<h2>PolicyForm</h2>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Please fix the following error:")
+        <p>
+        <p> @Html.ValidationMessageFor(m => m.PolicyToAdd.Category.categoryName)</p>
+        <label>Category</label>
+        @Html.DropDownListFor(m => m.PolicyToAdd.Category.categoryName, Model.CategoryList, "Select a Category", new { @class = "form-control" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(m => m.PolicyToAdd.PolicyTitle)
+        </p>
+        <p>
+            <label>Title</label>
+            @Html.TextBoxFor(m => m.PolicyToAdd.PolicyTitle, new { @class = "form-control" })
+        </p>
+        <p>
+            @Html.ValidationMessageFor(m => m.PolicyToAdd.ContentText)
+        </p>
+        <p>
+            <label>Content</label>
+            @Html.TextAreaFor(m => m.PolicyToAdd.ContentText, 6, 40, new { @class = "form-control" })
+        </p>
+        <button class="btn btn-primary">Add</button>
+    }
+
+</div>

@@ -1,0 +1,80 @@
+﻿@using HRPortalNew.WebModels
+@model TimeSheetDetailsVM
+@{
+    ViewBag.Title = "ViewTimeSheetDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style type="text/css">
+        table {
+            width: 600px;
+        }
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;
+            text-align: left;
+        }
+        tr.detail:nth-child(even) {
+            background-color: #efefef;
+        }
+        /*tr.detail.odd {
+            background-color: #c3e6e5;
+        }*/
+
+    </style>
+</head>
+
+<h2>View Timesheet Details</h2>
+
+<div>
+    <table style="width: 40%">
+        @if (Model.TimeSheet.Any())
+        {
+            <tr>
+                <td>Employee Name</td>
+                <td>@Html.DisplayFor(m => m.EmployeeName) </td>
+            </tr>
+            <tr>
+                <td>Start Date</td>
+                <td>@Html.DisplayFor(m => m.StartDate)</td>
+            </tr>
+            <tr>
+                <td>Total Hours Worked</td>
+                <td>@Html.DisplayFor(m => m.TotalHour)</td>
+            </tr>
+            <tr><td></td></tr>
+
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Hours Worked</th>
+                <th scope="col"></th>
+            </tr>
+            foreach (var Time in Model.TimeSheet)
+            {
+                <tr class="detail">
+                    <td>@Time.Date</td>
+                    <td>@Time.Hours</td>
+                    <td>@Html.ActionLink("Remove Record", "RemoveTime", "Time", new { Id = Time.Id }, null)</td>
+                </tr>
+            }
+            
+        }
+        else
+        {
+            <tr>
+                <td>Employee Name</td>
+                <td>@Html.DisplayFor(m => m.EmployeeName) </td>
+            </tr>
+            <tr>
+                <td>There is no record for this employee.</td>
+            </tr>
+        }
+
+     </table >
+</div>

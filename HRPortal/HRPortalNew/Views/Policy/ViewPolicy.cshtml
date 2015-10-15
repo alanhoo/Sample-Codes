@@ -1,0 +1,20 @@
+﻿@using HRPortal.Models
+@model List<SelectListItem>
+@{
+    ViewBag.Title = "ViewPolicy";
+}
+
+<h2>ViewPolicy</h2>
+<div>
+    <h3>To view a policy, select a Category:</h3>
+
+    @using (Html.BeginForm("GetPolicyFromCategory", "Policy", FormMethod.Post))
+    {
+        <p></p>
+        <p>
+            <label>Category</label>      
+            @Html.DropDownList("Category", Model, "Choose Category", new { @class = "objectmargin" })
+        </p>
+        <button class="objectmargin btn btn-primary">Go To Category</button>
+    }
+</div>

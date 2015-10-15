@@ -1,0 +1,17 @@
+﻿@using HRPortal.Data
+@model List<SelectListItem>
+@{
+    ViewBag.Title = "ViewTimeSheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Timesheet</h2>
+@using (Html.BeginForm("ViewTimeSheetDetails", "Time", FormMethod.Post))
+{
+    <p>
+        <label>Choose an employee for timesheets:</label>
+        @Html.DropDownList("EmployeeID", Model, "Employee List", new { @class = "objectmargin" })
+
+        <button class="objectmargin btn btn-primary">Search</button>
+    </p>
+}

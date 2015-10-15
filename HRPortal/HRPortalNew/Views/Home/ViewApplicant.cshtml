@@ -1,0 +1,149 @@
+﻿@using HRPortal.Models
+
+@model List<Application>
+
+@{
+    ViewBag.Title = "ViewApplicant";
+}
+
+<head>
+    <style type="text/css">
+        table {
+            /*width: 600px;*/
+        }
+
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+
+        td.application {
+            width: 80%;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            /*border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;*/
+            text-align: left;
+            width: 20%;
+        }
+
+        tr.odd {
+            background-color: #efefef;
+        }
+
+        tr.even {
+            background-color: #c3e6e5;
+        }
+    </style>
+    <script>
+    $(document).ready(function () {
+        $(".ViewDetails").on('click', function() {
+            getApplicantJson($(this).attr("index"));
+        });
+
+        $(".ViewDetailsNew").on('click', function () {
+            var results = "<p>redirecting</p>";
+            $("#Result").html(results);
+            window.location.href = '/Home/ViewDetailsJ?id=' + $(this).attr("index");
+        });
+
+        $(".Edit").on('click', function () {
+            var results = "<p>redirecting</p>";
+            $("#Result").html(results);
+            window.location.href = '/Home/EditForm?id=' + $(this).attr("index");
+        });
+
+        $(".Remove").on('click', function () {
+            var results = "<p>redirecting</p>";
+            $("#Result").html(results);
+            window.location.href = '/Home/RemoveApplication?id=' + $(this).attr("index");
+        });
+
+        function getApplicantJson(ID) {
+            $.getJSON("/Home/ViewDetailsJH/", {id: ID}).done( function(data) {
+                $("#Result").html(createDisplayTable(data));
+            }).fail(function (){
+                $("#Result").html("<p>The Applicant does not exists</p>");
+            });
+        }
+
+        function createDisplayTable(data) {
+            var tablestring = "";
+            tablestring += "<table>";
+            tablestring += "<tr class=\"odd\"><th scope=\"row\">Applicant ID</th>";
+            tablestring += "<td class=\"application\">" + data.applicantId + "</td>";
+            tablestring += "<tr class=\"even\"><th scope=\"row\">Name</th>";
+            tablestring += "<td class=\"application\">" + data.Name + "</td>";
+            tablestring += "<tr class=\"odd\"><th scope=\"row\">Email</th>";
+            tablestring += "<td class=\"application\">" + data.Email + "</td>";
+            tablestring += "<tr class=\"even\"><th scope=\"row\">Phone</th>";
+            tablestring += "<td class=\"application\">" + data.Phone + "</td>";
+            tablestring += "<tr class=\"odd\"><th scope=\"row\">Address</th>";
+            tablestring += "<td class=\"application\">" + data.Address + "</td>";
+            tablestring += "<tr class=\"even\"><th scope=\"row\">City</th>";
+            tablestring += "<td class=\"application\">" + data.City + "</td>";
+            tablestring += "<tr class=\"odd\"><th scope=\"row\">State</th>";
+            tablestring += "<td class=\"application\">" + data.State + "</td>";
+            tablestring += "<tr class=\"even\"><th scope=\"row\">Zip</th>";
+            tablestring += "<td class=\"application\">" + data.Zip + "</td>";
+            tablestring += "<tr class=\"odd\"><th scope=\"row\">Experiences</th>";
+            tablestring += "<td class=\"application\">" + data.Experiences + "</td>";
+            tablestring += "<tr class=\"even\"><th scope=\"row\">Education</th>";
+            tablestring += "<td class=\"application\">" + data.Education + "</td>";
+            tablestring += "</table>";
+
+            return tablestring;
+        }
+    });
+
+    </script>
+</head>
+
+
+
+
+<div>
+    <h2>Manage Applications with jQuery and Json</h2>
+    @if (Model.Any())
+    {
+        <table>
+          
+                <tr>
+                    <th scope ="col">Name</th>
+                    @*<th scope ="col"></th>
+                    <th scope ="col"></th>
+                    <th scope ="col"></th>*@
+                </tr>
+   
+                @foreach (var application in Model)
+                {
+                    <tr>
+                        <td>@application.Name</td>
+                        <td></td>
+                        <td><input type="button" class="ViewDetails" id="ViewDetails" index=@application.applicantId value="View Details Below"/></td>
+                        <td><input type="button" class="ViewDetailsNew" id="ViewDetailsNew" index=@application.applicantId value="View Details in other page"/></td>
+                        <td><input type="button" class="Edit" id="Edit" index=@application.applicantId value="Edit" /></td>
+                        <td><input type="button" class="Remove" id="Remove" index=@application.applicantId value="Remove" /></td>
+                        @*<td><a id="ViewDetails" value=@application.applicantId>View Details</a></td>*@
+                        @*<td>@Html.ActionLink("View Details", "ViewDetails", "Home", new { id = application.applicantId }, null)</td>*@
+                        @*<td>@Html.ActionLink("Remove","RemoveApplication","Home", new {id = application.applicantId}, null)</td>*@
+                        @*<td>@Html.ActionLink("View Details in Jquery", "ViewDetailsJ", "Home", new { id = application.applicantId }, null)</td>*@
+
+                    </tr>
+                }
+        </table>
+    }
+    else
+    {
+        <p>There is no applicant yet.</p>
+    }
+    <div>
+
+
+        <div id="Result"></div>
+        <p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
+    </div>
+</div>

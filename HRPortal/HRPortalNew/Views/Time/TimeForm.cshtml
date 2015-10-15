@@ -1,0 +1,63 @@
+﻿@using HRPortalNew.WebModels
+@model TimeToAddVM
+@{
+    ViewBag.Title = "TimeForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<head>
+    <style type="text/css">
+        label.TimeFormLabel {
+            float: left;
+            width: 160px;
+            clear: left;
+        }
+        .TimeFormEditor {
+            width: 200px;
+            height: 40px;
+             /*float: left;
+            
+            clear: left;*/
+            /*margin: 10px;*/
+        }
+        .TimeFormDiv {
+            vertical-align: auto;
+            margin:20px;
+        }
+
+    </style>
+</head>*@
+<h2>Time Form</h2>
+<div>
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            @Html.ValidationSummary(true, "Please fix the following error:")
+
+            <p> @Html.ValidationMessageFor(m => m.TimeToAdd.EmpID)</p>
+
+            <p>
+            <label class="TimeFormLabel">Employee</label>
+
+         
+            @Html.DropDownListFor(m => m.TimeToAdd.EmpID, Model.EmployeeList, "Select an employee", new { @class = "form-control" })
+                </p>
+            <p>
+                @Html.ValidationMessageFor(m => m.TimeToAdd.Date)
+            </p>
+            <p>
+                <label class="TimeFormLabel">Date</label></p>
+            <p>
+            @Html.EditorFor(m => m.TimeToAdd.Date, new { @Class = "form-control" })
+                </p>
+            <p>
+                @Html.ValidationMessageFor(m => m.TimeToAdd.Hours)
+            </p>
+            <p>
+            <label class="TimeFormLabel">Number of hour</label>
+            @Html.TextBoxFor(m => m.TimeToAdd.Hours, new { @Class = "form-control" })
+                </p>
+            <button class="btn btn-primary">Add</button>
+            </div>
+            }
+
+</div>

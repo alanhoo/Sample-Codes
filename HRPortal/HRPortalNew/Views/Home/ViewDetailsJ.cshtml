@@ -1,0 +1,85 @@
+﻿@model int
+@{
+    ViewBag.Title = "ViewDetailsJ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style type="text/css">
+        table {
+            /*width: 600px;*/
+        }
+
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+
+        td {
+            width: 80%;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            /*border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;*/
+            text-align: left;
+            width: 20%;
+        }
+
+        tr.odd {
+            background-color: #efefef;
+        }
+        tr.even {
+            background-color: #c3e6e5;
+        }
+
+    </style>
+    <script>
+    $(document).ready(function () {
+        getApplicantJson();
+    });
+
+    function getApplicantJson() {
+        $.getJSON("/Home/ViewDetailsJH/", {id: @Model}).done( function(data) {
+            $("#Result").html(createDisplayTable(data));
+        }).fail(function (){
+            $("#Result").html("<p>The Applicant does not exists</p>");
+        });
+    }
+
+    function createDisplayTable(data) {
+        var tablestring = "";
+        tablestring += "<table>";
+        tablestring += "<tr class=\"odd\"><th scope=\"row\">Applicant ID</th>";
+        tablestring += "<td>"+data.applicantId+ "</td>";
+        tablestring += "<tr class=\"even\"><th scope=\"row\">Name</th>";
+        tablestring += "<td>"+ data.Name + "</td>";
+        tablestring += "<tr class=\"odd\"><th scope=\"row\">Email</th>";
+        tablestring += "<td>"+ data.Email + "</td>";
+        tablestring += "<tr class=\"even\"><th scope=\"row\">Phone</th>";
+        tablestring += "<td>"+ data.Phone + "</td>";
+        tablestring += "<tr class=\"odd\"><th scope=\"row\">Address</th>";
+        tablestring += "<td>"+ data.Address + "</td>";
+        tablestring += "<tr class=\"even\"><th scope=\"row\">City</th>";
+        tablestring += "<td>"+ data.City + "</td>";
+        tablestring += "<tr class=\"odd\"><th scope=\"row\">State</th>";
+        tablestring += "<td>"+ data.State + "</td>";
+        tablestring += "<tr class=\"even\"><th scope=\"row\">Zip</th>";
+        tablestring += "<td>"+ data.Zip + "</td>";
+        tablestring += "<tr class=\"odd\"><th scope=\"row\">Experiences</th>";
+        tablestring += "<td>"+ data.Experiences + "</td>";
+        tablestring += "<tr class=\"even\"><th scope=\"row\">Education</th>";
+        tablestring += "<td>"+ data.Education + "</td>";
+        tablestring += "</table>";
+
+        return tablestring;
+    }
+
+    </script>
+</head>
+
+
+<h2>View Details From JQuery</h2>
+
+<div id="Result"></div>

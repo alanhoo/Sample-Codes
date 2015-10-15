@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "ManageCategoryJ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <style type="text/css">
+        table {
+            /*border: black;
+            border-corner-shape: curve;
+            border-spacing: 0px;
+            border-width: 5px;*/
+            width: 300px;
+        }
+
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+
+        td {
+            width: 80%;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;
+            text-align: left;
+            width: 20%;
+        }
+
+        tr.odd {
+            background-color: #efefef;
+        }
+
+        tr.even {
+            background-color: #c3e6e5;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            ShowCategoryList();
+
+            $("#AddCategory").on('click', function () {
+                AddCategory();
+            });
+        });
+
+        function ShowCategoryList() {
+            $.getJSON("/Policy/ManageCategoryJH/", null).done(function (data) {
+                $("#Result").html(createTable(data));
+            }).fail(function () {
+                $("#Result").html("<p>The category list cannot be loaded.</p>");
+            });
+        }
+
+        function AddCategory() {
+            $.getJSON("/Policy/AddCategoryJ/", { category: $("#Category").val() }).done(function (data) {
+                $("#Result").html(createTable(data));
+                var message = "<h3>Category " + $("#Category").val() + " is added.</h3>";
+                $("#Message").html(message);
+                $("#Category").val("");
+            }).fail(function () {
+                $("#Result").html("<p>The category list cannot be loaded.</p>");
+            });
+        }
+
+        function createTable(data) {
+            var results = "";
+            var rowcounter = 1;
+            results += "<table>";
+            results += "<tr><th>Category</th></tr>";
+            $.each(data, function () {
+                if (rowcounter % 2 == 1) {
+                    results += "<tr class=\"odd\"><td>";
+                } else {
+                    results += "<tr class=\"even\"><td>";
+                }
+                results += this.categoryName;
+                results += "</td></tr>";
+                rowcounter++;
+            });
+            results += "</table>";
+
+            return results;
+        }
+
+    </script>
+</head>
+<h2>Manage Category with jQuery and Json</h2>
+
+<p>
+    <label>Enter new Category:</label>
+    <input type="text" id="Category" name="Category"/>
+
+<button id="AddCategory" class="btn btn-primary">Add</button>
+</p>
+<div id="Result"></div>
+<div id="Message"></div>

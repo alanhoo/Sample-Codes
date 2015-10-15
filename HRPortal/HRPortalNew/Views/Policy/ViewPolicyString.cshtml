@@ -1,0 +1,40 @@
+﻿@using HRPortal.Models
+
+@model List<String>
+
+@{
+    ViewBag.Title = "ViewPolicyString";
+}
+
+<h2>ViewPolicyString</h2>
+<div>
+    <h1>My Policy</h1>
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var policyTitle in Model)
+                {
+                    <tr>
+                        <td>@policyTitle</td>
+                        <td></td>
+                        <td>@Html.ActionLink("View Details", "ViewPolicyDetails", "Home", new { title = policyTitle }, null)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There is no policy yet.</p>
+    }
+</div>

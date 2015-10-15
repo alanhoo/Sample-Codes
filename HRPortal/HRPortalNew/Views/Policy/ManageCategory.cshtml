@@ -1,0 +1,44 @@
+﻿@using HRPortal.Models
+@model List<Category>
+@{
+    ViewBag.Title = "ManageCategory";
+}
+
+<h2>ManageCategory</h2>
+<div>
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Category list:</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.categoryName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There is no Category yet.</p>
+    }
+
+    <p></p>
+    @using (Html.BeginForm("AddCategory", "Policy", FormMethod.Post))
+    {
+        <p>
+            <label>Enter new Category:</label>
+            <input type="text" id="Category" name="Category" />
+        </p>
+        <button class="btn btn-primary">Add</button>
+    }
+
+</div>

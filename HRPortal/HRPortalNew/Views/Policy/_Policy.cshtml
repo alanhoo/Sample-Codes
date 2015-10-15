@@ -1,0 +1,24 @@
+﻿@using HRPortal.Models
+@model Policy
+@{
+    ViewBag.Title = "_Policy";
+}
+
+<h2>_Policy</h2>
+<div>
+    <table style="width: 40%">
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.PolicyTitle)</td>
+            <td>@Html.DisplayFor(m => m.PolicyTitle) </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Category.categoryName)</td>
+            <td>@Html.DisplayFor(m => m.Category.categoryName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.ContentText)</td>
+            <td>@Html.DisplayFor(m => m.ContentText) </td>
+        </tr>
+    </table>
+
+</div>

@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "IndexJson";
+}
+
+<head>
+    <style type="text/css">
+        table {
+            /*width: 600px;*/
+        }
+
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+
+        td.stock {
+            width: 20%;
+        }
+
+        td#uptick {
+            color: green;
+        }
+
+        td#downtick {
+            color: firebrick;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            /*border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;*/
+            text-align: left;
+            width: 20%;
+        }
+
+        tr.odd {
+            background-color: #efefef;
+        }
+
+        tr.even {
+            background-color: #c3e6e5;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnSubmit').click(function () {
+                setInterval(getQuote, 2000);
+            });
+        });
+
+        function getQuote() {
+            var URL = "/Stock/GetQuoteJson/";
+            $.getJSON(URL, { symbol: $("#Symbol").val() }, function (data) {
+                var result = "";
+                result = "<table>";
+                result += createDisplayTableHeader();
+                var rowNumber = 0;
+                $.each(data, function (index, d) {
+                    result += createDisplayTable(d, rowNumber);
+                    rowNumber++;
+                });
+                result += "</table>";
+                $("#Result").html(result);
+            });
+        }
+
+        function createDisplayTable(d, rowNumber) {
+            var tablestring = "";
+            if (rowNumber % 2 == 0) {
+                tablestring += "<tr class=\"even\">";
+            } else {
+                tablestring += "<tr class=\"odd\">";
+            }
+            tablestring += "<td class=\"stock\">" + d.Symbol + "</td>";
+            tablestring += "<td class=\"stock\">" + d.Name + "</td>";
+            if (d.Uptick == "0") {
+                tablestring += "<td class=\"stock\" id=\"uptick\">";
+            }
+            else if (d.Uptick == "1")
+            {
+                tablestring += "<td class=\"stock\" id=\"downtick\">";
+            } else
+            {
+                tablestring += "<td class=\"stock\" id=\"downtick\">";
+            }
+            tablestring += d.LastTradePrice + "</td>";
+            tablestring += "<td class=\"stock\">" + d.Change + "</td>";
+            tablestring += "<td class=\"stock\">" + d.DividendYield + "</td>";
+            tablestring += "<td class=\"stock\">" + d.PERatio + "</td>";
+            tablestring += "</tr>";
+
+            return tablestring;
+        }
+
+        function createDisplayTableHeader() {
+            var tablestring = "";
+            tablestring += "<tr class=\"odd\"><th scoope=\"col\">Symbol</th>";
+            tablestring += "<th scoope=\"col\">Name</th>";
+            tablestring += "<th scoope=\"col\">Last Trade Price</th>";
+            tablestring += "<th scoope=\"col\">Change</th>";
+            tablestring += "<th scoope=\"col\">Dividend Yield</th>";
+            tablestring += "<th scoope=\"col\">P/E Ratio</th>";
+            tablestring += "</tr>";
+
+            return tablestring;
+        }
+
+    </script>
+
+</head>
+    <div>
+        <h2>Get Stock Quote</h2>
+        <h3>Enter the stock symbols (seperated by commas).</h3>
+        <h3>For example, "AAPL, HOG, MSFT, GPRO, WMT"</h3>
+        <input type="text" id="Symbol" style="width: 325px" value="AAPL, HOG, MSFT, GPRO, WMT" />
+        <input type="button" id="btnSubmit"
+               value="Get Quotes" />
+        <br /> <br />
+        <div id="Result"></div>
+    </div>

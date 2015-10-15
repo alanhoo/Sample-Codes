@@ -1,0 +1,34 @@
+﻿@using HRPortal.Models
+@model Application
+@{
+    ViewBag.Title = "ThankYou";
+}
+
+<script>
+    $(document).ready(function() {
+        showThankYouMessage();
+    });
+
+    function showThankYouMessage() {
+        var message = "";
+        message += "<h1>";
+        message += "@Model.Name";
+        message += " , thank you for your application.</h1>";
+  
+       $("#Message").html(message);
+     
+    };
+
+</script>
+
+
+<div>
+    <br/>
+    <div id="Message"></div>
+
+    <p>@Html.ActionLink("View Applications", "ViewApplicant", "Home")</p>
+
+    <p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
+
+
+</div>

@@ -1,0 +1,111 @@
+﻿@using HRPortal.Models
+@model List<Policy>
+@{
+    ViewBag.Title = "GetPolicyFromCategory";
+}
+
+<head>
+    <style type="text/css">
+        table {
+            width: 800px;
+        }
+
+        th, td {
+            padding: 7px 10px 10px 10px;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 90%;
+            border-bottom: 2px solid #111111;
+            border-top: 1px solid #999;
+            text-align: left;
+        }
+
+        tr.detail:nth-child(even) {
+            background-color: #efefef;
+        }
+
+        .content {
+            width: 600px;
+        }
+
+        .title {
+            text-transform: uppercase;
+            font-size: 90%;
+            text-align: left;
+        }
+       
+    </style>
+</head>
+
+<h3>View Policy Details</h3>
+
+<div>
+    <table> @*style="width: 40%">*@
+        @if (Model.Any())
+        {
+            <tr class ="title">
+                <td>Category:</td>
+                <td>@Html.DisplayFor(m => m.First().Category.categoryName) </td>
+            </tr>
+            <tr><td></td></tr>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col"></th>
+            </tr>
+            foreach (var policy in Model)
+            {
+                <tr class="detail">
+                    <td>@policy.PolicyTitle</td>
+                    <td class ="content">@policy.ContentText</td>
+                    <td>@Html.ActionLink("Remove Policy", "RemovePolicy", "Policy", new { title = policy.PolicyTitle }, null)</td>
+                </tr>
+            }
+
+        }
+        else
+        {            
+            <tr>
+                <td>There is no record for this category.</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+
+
+
+@*<div>
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var policy in Model)
+                {
+                    <tr>
+                        <td>@policy.PolicyTitle</td>
+                        <td>@policy.ContentText</td>
+                        <td></td>
+                        <td>@Html.ActionLink("Remove Policy", "RemovePolicy", "Policy", new { title = policy.PolicyTitle }, null)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>There is no policy in the category.</p>
+    }
+</div>*@

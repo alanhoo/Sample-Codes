@@ -1,0 +1,27 @@
+﻿@model List<SelectListItem>
+@{
+    ViewBag.Title = "ManagePolicy";
+}
+
+
+<div>
+    <h2>ManagePolicy</h2>
+
+    @using (Html.BeginForm("PolicyForm", "Policy", FormMethod.Get))
+    {
+        <label>Add new policy</label>
+        <button class="objectmargin btn btn-primary">Add</button>
+       
+    }
+
+    @using (Html.BeginForm("GetPolicyFromCategory", "Policy", FormMethod.Post))
+    {
+        <p>
+            <label>Search in Category</label>
+            @Html.DropDownList("Category", Model, "Choose Category", new { @class = "objectmargin" })
+           
+            <button class="objectmargin btn btn-primary">Search</button>
+        </p>
+    }
+</div>
+
